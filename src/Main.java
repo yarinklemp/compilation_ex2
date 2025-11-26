@@ -62,7 +62,7 @@ public class Main
 			/*************************/
 			/* [7] Close output file */
 			/*************************/
-			fileWriter.close();
+			fileWriter.flush();
 			
 			/*************************************/
 			/* [8] Finalize AST GRAPHIZ DOT file */
@@ -76,5 +76,3 @@ public class Main
 		}
 	}
 }
-
-
