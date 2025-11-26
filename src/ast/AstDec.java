@@ -7,8 +7,4 @@ public abstract class AstDec extends AstNode
     {
         super(lineNumber);
     }
-    public void printMe()
-    {
-        System.out.print("AST NODE UNKNOWN\n");
-    }
 }

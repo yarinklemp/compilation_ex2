@@ -8,14 +8,22 @@ public class AstProgram extends AstNode
     {
         super(lineNumber);
         this.decList = decList;
-
+        serialNumber = AstNodeSerialNumber.getFresh();
+        System.out.print("====================== program -> decList\n");
     }
 
     public void printMe()
     {
         System.out.print("AST PROGRAM\n");
-
-        if (decList != null) decList.printMe();
-    }
+        AstGraphviz.getInstance().logNode(
+            serialNumber,
+            "PROGRAM\n");
+        if (decList != null){
+            decList.printMe();
+            AstGraphviz.getInstance().logNode(
+                serialNumber,
+                "PROGRAM\n");
+            }
+    }   
     
 }

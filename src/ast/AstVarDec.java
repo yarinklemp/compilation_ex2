@@ -14,6 +14,8 @@ public class AstVarDec extends AstDec
         this.name = name;
         this.type = type;
         this.initExp = initExp;
+        serialNumber = AstNodeSerialNumber.getFresh();
+        System.out.print("====================== varDec -> type ID ASSIGN exp\n");
     }
         public AstVarDec(AstType type, String name, AstNewExp newExp,  int lineNumber)
     {
@@ -21,13 +23,28 @@ public class AstVarDec extends AstDec
         this.name = name;
         this.type = type;
         this.newExp = newExp;
+        serialNumber = AstNodeSerialNumber.getFresh();
+        System.out.print("====================== varDec -> type ID ASSIGN newExp\n");
     }
 
     public void printMe()
     {
-        System.out.print("AST VAR DEC\n");
-        System.out.print("Name: " + name + "\n");
-        if (type != null) type.printMe();
+        System.out.format("AST VAR DEC name (%s)\n", name);
+        AstGraphviz.getInstance().logNode(
+            serialNumber,
+            String.format("VAR DEC\nname (%s)", name));
+        if (type != null){
+            type.printMe();
+            AstGraphviz.getInstance().logEdge(serialNumber,type.serialNumber);
+        }
+        if (initExp != null){
+            initExp.printMe();
+            AstGraphviz.getInstance().logEdge(serialNumber,initExp.serialNumber);
+        }
+        if (newExp != null){
+            newExp.printMe();
+            AstGraphviz.getInstance().logEdge(serialNumber,newExp.serialNumber);
+        }
     }
     
 }

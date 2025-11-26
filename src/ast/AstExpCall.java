@@ -6,4 +6,7 @@ public class AstExpCall extends AstExp {
         super(lineNumber);
         this.call = call;
     }
+    public void printMe(){
+        call.printMe();
+    }
 }

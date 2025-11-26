@@ -13,6 +13,22 @@ public class AstStmtIf extends AstStmt
 		super(lineNumber);
 		this.cond = cond;
 		this.body = body;
+		serialNumber = AstNodeSerialNumber.getFresh();
+		System.out.print("====================== stmt -> IF ");
 	}
 
+	public void printMe()
+	{
+		System.out.print("AST NODE STMT IF\n");
+		AstGraphviz.getInstance().logNode(serialNumber, "STMT\nIF");
+
+		if (cond != null){
+			cond.printMe();
+			AstGraphviz.getInstance().logEdge(serialNumber, cond.serialNumber);
+		}
+		if (body != null){
+			body.printMe();
+			AstGraphviz.getInstance().logEdge(serialNumber, body.serialNumber);
+		}
+	}
 }
