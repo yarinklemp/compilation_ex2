@@ -75,9 +75,10 @@ LineTerminator	= \r|\n|\r\n
 WhiteSpace		= {LineTerminator} | [ \t\f]
 INTEGER			= 0 | [1-9][0-9]*
 ID				= [a-zA-Z_][a-zA-Z0-9_]*
+STR_OK =  \"[A-Za-z]*\"
 
-COMMENT1_CHAR    = [A-Za-z0-9()\[\]\{\}\?\!\+\-\*/\.; \t]
-COMMENT2_CHAR    = [A-Za-z0-9()\[\]\{\}\?\!\+\-\*/\.; \t\n]
+COMMENT1_CHAR    = [A-Za-z0-9()\[\]\{\}\?\!\+\-\*/\.; \t\r]
+COMMENT2_CHAR    = [A-Za-z0-9()\[\]\{\}\?\!\+\-\*/\.; \t\n\r]
 %state COMMENT2
    
 /******************************/
@@ -111,6 +112,7 @@ COMMENT2_CHAR    = [A-Za-z0-9()\[\]\{\}\?\!\+\-\*/\.; \t\n]
 "array"				{ return symbol(TokenNames.ARRAY);}
 "return"			{ return symbol(TokenNames.RETURNN);}
 "while"				{ return symbol(TokenNames.WHILE);}
+"else"				{ return symbol(TokenNames.ELSE);}
 "="					{ return symbol(TokenNames.EQ);}
 "."					{ return symbol(TokenNames.DOT);}
 "+"					{ return symbol(TokenNames.PLUS);}
@@ -130,6 +132,7 @@ COMMENT2_CHAR    = [A-Za-z0-9()\[\]\{\}\?\!\+\-\*/\.; \t\n]
 "new"				{return symbol(TokenNames.NEW);}
 ","					{return symbol(TokenNames.COMMA);}
 "nil"				{return symbol(TokenNames.NIL);}
+{STR_OK}			{String s = yytext(); return symbol(TokenNames.STRING, s);}
 {ID}				{ return symbol(TokenNames.ID, yytext());}
 {INTEGER}			{ return symbol(TokenNames.INT, Integer.valueOf(yytext()));}
 {WhiteSpace}		{ /* just skip what was found, do nothing */ }

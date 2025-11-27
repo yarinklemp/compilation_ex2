@@ -4,17 +4,25 @@ public class AstStmtIf extends AstStmt
 {
 	public AstExp cond;
 	public AstStmtList body;
+	public AstStmtElse elseStmt;
 
 	/*******************/
 	/*  CONSTRUCTOR(S) */
 	/*******************/
-	public AstStmtIf(AstExp cond, AstStmtList body, int lineNumber)
+	public AstStmtIf(AstExp cond, AstStmtList body, AstStmtElse elseStmt, int lineNumber)
 	{
 		super(lineNumber);
 		this.cond = cond;
 		this.body = body;
+		this.elseStmt = elseStmt;
 		serialNumber = AstNodeSerialNumber.getFresh();
-		System.out.print("====================== stmt -> IF ");
+		if (elseStmt == null){
+			System.out.print("====================== stmt -> IF ");
+		}
+		else
+		{
+			System.out.print("====================== stmt -> IF STMT_LIST ELSE STMT_LIST\n");
+		}
 	}
 
 	public void printMe()
@@ -29,6 +37,10 @@ public class AstStmtIf extends AstStmt
 		if (body != null){
 			body.printMe();
 			AstGraphviz.getInstance().logEdge(serialNumber, body.serialNumber);
+		}
+		if (elseStmt != null){
+			elseStmt.printMe();
+			AstGraphviz.getInstance().logEdge(serialNumber, elseStmt.serialNumber);
 		}
 	}
 }

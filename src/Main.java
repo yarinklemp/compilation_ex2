@@ -48,7 +48,10 @@ public class Main
 			/* [5] 3 ... 2 ... 1 ... Parse !!! */
 			/***********************************/
 			ast = (AstProgram) p.parse().value;
-			
+
+			fileWriter.write("OK");
+			fileWriter.flush();
+			fileWriter.close();
 			/*************************/
 			/* [6] Print the AST ... */
 			/*************************/
@@ -57,12 +60,12 @@ public class Main
 			/*************************/
 			/* [6.5] Write Ok msg... */
 			/*************************/
-			fileWriter.write("OK");
+
 			
 			/*************************/
 			/* [7] Close output file */
 			/*************************/
-			fileWriter.flush();
+	
 			
 			/*************************************/
 			/* [8] Finalize AST GRAPHIZ DOT file */

@@ -20,10 +20,10 @@ public class AstProgram extends AstNode
             "PROGRAM\n");
         if (decList != null){
             decList.printMe();
-            AstGraphviz.getInstance().logNode(
+            AstGraphviz.getInstance().logEdge(
                 serialNumber,
-                "PROGRAM\n");
-            }
+                decList.serialNumber);
+        }
     }   
     
 }
